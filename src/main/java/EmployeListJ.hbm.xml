@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+  
+ <hibernate-mapping>  
+  <class name="mgr.EmployeeListJ" table="employeelist">
+   		<id name="eidJ" type="int">
+            <column name="eid" precision="10" not-null="true" />
+        </id>
+        <property name="firstNameJ" type="text">
+            <column name="firstName" length="31" not-null="true" />
+        </property>
+        <property name="lastNameJ" type="text">
+            <column name="lastName" length="31" not-null="true" />
+        </property>
+        <property name="Email_idJ" type="text">
+            <column name="Email_id" length="31" not-null="false" />
+        </property>
+    </class>
+            
+ </hibernate-mapping>  

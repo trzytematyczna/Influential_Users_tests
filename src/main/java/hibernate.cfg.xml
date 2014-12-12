@@ -11,5 +11,8 @@
 		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
 		<property name="show_sql">true</property>
 		<mapping resource="ReferenceInfoJ.hbm.xml"/>
+		<mapping resource="EmployeListJ.hbm.xml"/>
+		<mapping resource="RecipientInfoJ.hbm.xml"/>
+		<mapping resource="MessageJ.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>
