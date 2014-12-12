@@ -24,6 +24,7 @@ public class App
 //		System.out.println(ri.getMidJ()+ri.getReferenceJ()+ri.getRfidJ());
 //		RecipientInfoJ ri = new RecipientInfoJ(9991920, 91919, "TO", "rvalue", null);
 		MessageJ ri = new MessageJ(91919, "sender", "2000-01-21 04:51:00", "msgid", "subject", "body", "folder");
+		
 		session.save(ri);
 		session.getTransaction().commit();
 	}
