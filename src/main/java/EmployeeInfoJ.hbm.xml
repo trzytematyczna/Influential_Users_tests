@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+  
+ <hibernate-mapping>  
+  <class name="mgr.EmployeeInfoJ" table="EmployeeInfo">
+   <id name="eid" type="int">
+            <column name="eid" precision="10" not-null="true" />
+   </id>            
+   <property name="email" type="text">
+       <column name="email" length="31" not-null="true" />
+   </property>
+
+   <property name="received_email" type="int">
+            <column name="received_email" precision="10" not-null="true" />
+   </property>            
+   <property name="latest_email" type="text">
+            <column name="latest_email" length="20" not-null="true" />
+   </property>            
+   <property name="profilerank" type="double">
+            <column name="profilerank" precision="10" not-null="true" />
+   </property>         
+ </class>
+            
+ </hibernate-mapping>  
