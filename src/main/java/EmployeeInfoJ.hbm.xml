@@ -5,14 +5,16 @@
   
  <hibernate-mapping>  
   <class name="mgr.EmployeeInfoJ" table="EmployeeInfo">
-   <id name="eid" type="int">
+   <id name="eid" type="long">
             <column name="eid" precision="10" not-null="true" />
    </id>            
    <property name="email" type="text">
        <column name="email" length="31" not-null="true" />
    </property>
-
-   <property name="received_email" type="int">
+   <property name="sent_email" type="long">
+            <column name="sent_email" precision="10" not-null="true" />
+   </property> 
+   <property name="received_email" type="long">
             <column name="received_email" precision="10" not-null="true" />
    </property>            
    <property name="latest_email" type="text">

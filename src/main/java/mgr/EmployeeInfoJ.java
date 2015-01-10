@@ -1,18 +1,26 @@
 package mgr;
 
 public class EmployeeInfoJ {
-	private int eid;
+	private long eid;
 	private String email;
-	private int sent_email;
-	private int received_email;
+	private long sent_email;
+	private long received_email;
 	private String latest_email;
 	private double profilerank;
+
+	public EmployeeInfoJ(long e, String mail, long sent, long recived, String latest, double profile) {
+		this.eid=e;
+		this.email=mail;
+		this.sent_email=sent;
+		this.received_email=recived;
+		this.latest_email=latest;
+		this.profilerank=profile;
+	}
 	
-	
-	public int getEid() {
+	public long getEid() {
 		return eid;
 	}
-	public void setEid(int eid) {
+	public void setEid(long eid) {
 		this.eid = eid;
 	}
 	public String getEmail() {
@@ -21,16 +29,16 @@ public class EmployeeInfoJ {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getSent_email() {
+	public long getSent_email() {
 		return sent_email;
 	}
-	public void setSent_email(int sent_email) {
+	public void setSent_email(long sent_email) {
 		this.sent_email = sent_email;
 	}
-	public int getReceived_email() {
+	public long getReceived_email() {
 		return received_email;
 	}
-	public void setReceived_email(int received_email) {
+	public void setReceived_email(long received_email) {
 		this.received_email = received_email;
 	}
 	public String getLatest_email() {

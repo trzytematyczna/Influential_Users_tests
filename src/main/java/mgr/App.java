@@ -10,8 +10,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.CriteriaQuery;
 
 /**
  * Hello world!
@@ -40,18 +43,50 @@ public class App
 		List<EmployeeListJ> email_list = query.list();
 */
 		Query email_query = session.createQuery("select e.Email_idJ from EmployeeListJ e");
+//		email_query.setMaxResults(2);
 		List<Object> email_list = email_query.list();
 		LinkedList<String[]> emails_count = new LinkedList<String[]>();
 
+EmployeeInfoJ[] emp = new EmployeeInfoJ[4];
+long i=1;
 //sent emails count		
-//		for(Object emp4 : email_list){
+		for(Object emp4 : email_list){
 //			System.out.println("Mails::"+emp4);//Arrays.toString(emp4));
-//			Query email_count_query = session.createQuery("select count(*) from MessageJ where senderJ = :sender");
-//			email_count_query.setParameter("sender", emp4);
-//			long count = (long) email_count_query.uniqueResult();
-//			String[] tab = {(String) emp4, Long.toString(count)};
-//			emails_count.add(tab);
-//			System.out.println(tab[0]+" "+tab[1]);
+			Query query = session.createQuery("select count(*) from MessageJ where senderJ = :sender");
+			query.setParameter("sender", emp4);
+			long sentcount = (long) query.uniqueResult();
+			
+			query = session.createQuery("select eidJ from EmployeeListJ where Email_idJ = :email");
+			query.setParameter("email", emp4);
+			int eid = (int) query.uniqueResult();
+			
+			query = session.createQuery("select count(*) from MessageJ where midJ in ("
+			+ "select midJ from RecipientInfoJ where rvalueJ = :email )");
+			query.setParameter("email", emp4);
+			long recivedcount = (long) query.uniqueResult();
+
+			query = session.createQuery("select count(*) from RecipientInfoJ where rvalue in (select distinct rvalueJ from RecipientInfoJ where midJ in "
+			+ "(select midJ from MessageJ m where senderJ = :email))");
+			query.setParameter("email", emp4);
+			long recipientcount = (long) query.uniqueResult();
+			String[] tab = {(String) emp4, Long.toString(sentcount), Long.toString(recivedcount), Long.toString(recipientcount)};
+			double rank = countProfileRank(sentcount, recivedcount);
+			EmployeeInfoJ empl = new EmployeeInfoJ(eid, (String) emp4, sentcount, recivedcount, "asd", rank);
+			session.save(empl);
+//			session.getTransaction().commit();
+			emails_count.add(tab);
+		}
+//		int i=0;
+//		for(Object elem : email_list){
+//			email_list.get(0)
+//			EmployeeInfoJ emp = new EmployeeInfoJ(i++, elem[0], elem[1], recived, latest, profile)
+//			emp.setEmail("lokesh@mail.com");
+//			emp.setFirstName("lokesh");
+//			emp.setLastName("gupta");
+//			
+//			//Save the employee in database
+//			session.save(emp);
+//			session.getTransaction().commit();
 //		}
 
 //received emails count		
@@ -74,46 +109,37 @@ public class App
 //			System.out.println((long) recipients.uniqueResult());
 //		}
 
-//recipients list not working
+	
+
+//recipients count not work 
+//		for(Object emp4 : email_list){
+////			Object emp5 = email_list.get(0);
+//			Query recipients1 = session.createQuery("select distinct count(rvalueJ) from RecipientInfoJ where midJ in "
+//					+ "(select midJ from MessageJ m where senderJ = :email)");
+////			recipients.setMaxResults(1);
+//			recipients1.setParameter("email", emp4);
+//			System.out.println(emp4+""+recipients1.uniqueResult());
+//			List<String> recipientsL = recipients1.list();
+//			for(String s : recipientsL){
+//						System.out.println(emp4+" "+s);
+//				
+//			}
+//		}
+		
+//recipients list
 //		LinkedList<String[]> recipients_list = new LinkedList<String[]>();
 //		for(Object emp4 : email_list){
-//			Query recipients = session.createQuery(""
-//					+ "select distinct r.rvalueJ from RecipientInfoJ as r "
-//					+ "inner join r.MessageJ as m "
-//					+ "where r.midJ = r.MessageJ.midJ ");
-////			recipients.setParameter("email", emp4);
+//			Query recipients = session.createQuery("select distinct rvalueJ from RecipientInfoJ where midJ in "
+//					+ "(select midJ from MessageJ m where senderJ = :email)");
+//			recipients.setParameter("email", emp4);
 //			List<String> recipientsL = recipients.list();
 //			for(String s : recipientsL){
 //				System.out.println(emp4+" "+s);
-//			}
-//		}		
-
-//recipients count
-//		for(Object emp4 : email_list){
-			Object emp5 = email_list.get(0);
-			Query recipients1 = session.createQuery("select distinct count(rvalueJ) from RecipientInfoJ where midJ in "
-					+ "(select midJ from MessageJ m where senderJ = :email)");
-//			recipients.setMaxResults(1);
-			recipients1.setParameter("email", emp5);
-			System.out.println(emp5+""+recipients1.uniqueResult());
-//			List<String> recipientsL = recipients.list();
-//			for(String s : recipientsL){
-//						System.out.println(emp4+" "+s);
-				
+//				
 //			}
 //		}
-//recipients list
-		LinkedList<String[]> recipients_list = new LinkedList<String[]>();
-		for(Object emp4 : email_list){
-			Query recipients = session.createQuery("select distinct rvalueJ from RecipientInfoJ where midJ in "
-					+ "(select midJ from MessageJ m where senderJ = :email)");
-			recipients.setParameter("email", emp4);
-			List<String> recipientsL = recipients.list();
-			for(String s : recipientsL){
-				System.out.println(emp4+" "+s);
-				
-			}
-		}
+//	
+//		
 		
 //last mail value
 /*
@@ -152,4 +178,10 @@ public class App
 		session.getTransaction().commit();
 		session.close();
 	}
+
+	private static double countProfileRank(long sentcount, long recivedcount) {
+		
+		return 0.05* sentcount + 0.07 * recivedcount;
+	}
+
 }
