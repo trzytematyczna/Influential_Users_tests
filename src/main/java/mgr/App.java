@@ -87,50 +87,36 @@ public class App
 //				System.out.println(emp4+" "+s);
 //			}
 //		}		
-		
-//		LinkedList<LinkedList<String>> times = new LinkedList<LinkedList<String>>();
-//		for (Object emp4 : email_list){
-//			LinkedList<String> user = new LinkedList<String>();
-//			user.add((String) emp4);
-//			Query timequery = session.createQuery("select m.date from MessageJ m where senderJ = :email");
-//			timequery.setParameter("email", emp4);
-//			times.add(timequery.list());
-////			times.add(asd);
+
+//recipients count
+//		for(Object emp4 : email_list){
+			Object emp5 = email_list.get(0);
+			Query recipients1 = session.createQuery("select distinct count(rvalueJ) from RecipientInfoJ where midJ in "
+					+ "(select midJ from MessageJ m where senderJ = :email)");
+//			recipients.setMaxResults(1);
+			recipients1.setParameter("email", emp5);
+			System.out.println(emp5+""+recipients1.uniqueResult());
+//			List<String> recipientsL = recipients.list();
+//			for(String s : recipientsL){
+//						System.out.println(emp4+" "+s);
+				
+//			}
 //		}
-		
-//		select sender, date from message m where sender in (select email_id from employeelist e) order by sender
-/*
-		Query timequery = session.createQuery("select senderJ, m.dateJ from MessageJ m where senderJ in ("
-				+ "select e.Email_idJ from EmployeeListJ e) order by senderJ");
-//		timequery.setMaxResults(5);
-		List<Object[]> times = timequery.list();
-//		LinkedList<Object[]> times = timequery.list();
-
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date last_mail = format.parse("1880-10-10 10:10:10");
-		for (Object arr : times){
-			Date old = format.parse("1880-10-10 10:10:10");
-			for (Object a : Arrays.asList(arr)){
-				System.out.println(a.toString());
-//				Date date = format.parse((String) a);
-//				 if (old.compareTo(date) <= 0) {
-//					 last_mail=date;
-//				 }
-//				 old = date;
+//recipients list
+		LinkedList<String[]> recipients_list = new LinkedList<String[]>();
+		for(Object emp4 : email_list){
+			Query recipients = session.createQuery("select distinct rvalueJ from RecipientInfoJ where midJ in "
+					+ "(select midJ from MessageJ m where senderJ = :email)");
+			recipients.setParameter("email", emp4);
+			List<String> recipientsL = recipients.list();
+			for(String s : recipientsL){
+				System.out.println(emp4+" "+s);
+				
 			}
-//			System.out.println(Arrays.l );
-//			System.out.println("Newest: "+last_mail);
 		}
-//		System.out.println(times.size());
-
-		query = session.createQuery("select count(m.dateJ) from MessageJ m where senderJ in (select e.Email_idJ from EmployeeListJ e) group by senderJ");
-		List tim = query.list();
-		for(Object ti : tim){
-			System.out.println(ti);
-		}
-		System.out.println(tim.size());
-*/		
+		
 //last mail value
+/*
 		LinkedList<String[]> lastest_list = new LinkedList<String[]>();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		for(Object emp4 : email_list){
@@ -156,7 +142,7 @@ public class App
 //			System.out.println("Newest: "+latest);
 //			System.out.println(times.size());
 		}
-
+*/
 		
 		Query query = session.createQuery("select count(*) from EmployeeListJ");
 		long count = (Long) query.uniqueResult();
