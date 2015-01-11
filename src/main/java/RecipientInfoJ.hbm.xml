@@ -8,10 +8,14 @@
    <id name="ridJ" type="int">
             <column name="rid" precision="10" not-null="true" />
         </id>
-        <property name="midJ" type="int">
+        <many-to-one name="message" class="mgr.MessageJ" fetch="select">
+            <column name="mid" not-null="true" />
+        </many-to-one>
+<!-- <property name="midJ" type="int">
             <column name="mid" length="10" not-null="true" />
         </property>
-        <property name="rtypeJ" type="text">
+ -->        
+         <property name="rtypeJ" type="text">
             <column name="rtype" length="20" not-null="false" />
         </property>
         <property name="rvalueJ" type="text">

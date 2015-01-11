@@ -26,6 +26,14 @@
         <property name="folderJ" type="text">
             <column name="folder" length="127" not-null="false" />
         </property>
+        
+        <set name="recipients" table="recipientinfo" 
+				inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="mid" not-null="true" />
+            </key>
+            <one-to-many class="mgr.RecipientInfoJ" />
+        </set>
     </class>
             
  </hibernate-mapping>  
