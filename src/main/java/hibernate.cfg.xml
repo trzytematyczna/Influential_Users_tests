@@ -17,5 +17,6 @@
 		<mapping resource="RecipientInfoJ.hbm.xml"/>
 		<mapping resource="MessageJ.hbm.xml"/>
 		<mapping resource="EmployeeInfoJ.hbm.xml"/>
+		
 	</session-factory>
 </hibernate-configuration>	
