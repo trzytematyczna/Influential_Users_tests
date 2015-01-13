@@ -43,27 +43,16 @@ EmployeeInfoJ[] emp = new EmployeeInfoJ[4];
 //			int eid = takeEid(session, emp4);
 //			long sentcount = takeSentCount(session, emp4);
 //			long recivedcount = takeReceivedCount(session, emp4);
-//			long recipientcount = takeRecipientCount(session, emp4);
 			List<String> recipientslist = takeRecipientsList(session, emp4); 
-			LinkedList<Long> mails = new LinkedList<Long>();
-			long sum=0;
-			for(String recipient : recipientslist){
-				Query query = session.createQuery("select count(m.midJ) from MessageJ m inner join m.recipients r where"
-						+ " (m.senderJ= :email and r.rvalueJ = :recipient) or "
-						+ "(m.senderJ= :recipient and r.rvalueJ = :email) )");
-				query.setParameter("email", emp4);
-				query.setParameter("recipient", recipient);
-				long res = (long) query.uniqueResult();
-				sum+=res;
-				mails.add(res);
-			}
-			Collections.sort(mails, new Comparator<Long>() {
-		        @Override
-		        public int compare(Long o1, Long o2) {
-		            return Collator.getInstance().compare(o1, o2);
-		        }
-		    });
-			System.out.println(sum);
+			long recipientcount = recipientCount(recipientslist);
+			List<String> friendslist = takeFriendsList(session, emp4);
+			
+//			Collections.sort(mails, new Comparator<Long>() {
+//		        @Override
+//		        public int compare(Long o1, Long o2) {
+//		            return Collator.getInstance().compare(o1, o2);
+//		        }
+//		    });
 //			String[] tab = {(String) emp4, Long.toString(sentcount), Long.toString(recivedcount), Long.toString(recipientcount)};
 //			double rank = countProfileRank(sentcount, recivedcount);
 //			EmployeeInfoJ empl = new EmployeeInfoJ(eid, (String) emp4, sentcount, recivedcount, "asd", rank);
@@ -134,10 +123,38 @@ EmployeeInfoJ[] emp = new EmployeeInfoJ[4];
 		session.getTransaction().commit();
 		session.close();
 	}
+	private static List<String> takeFriendsList(Session session, Object emp4) {
+		System.out.println(emp4);
+		Query query = session.createQuery("select sender from SenderRecipientJ where rvalue = :email "
+				+ "and sender in (select rvalue from SenderRecipientJ where sender = :email )");
+		query.setParameter("email", emp4);
+		List<String> friends = query.list();
+		return friends;
+	}
+//	private static LinkedList<String> takeFriendsList(Session session,
+//			List<String> recipientslist, Object emp4) {
+//		LinkedList<String> friends = new LinkedList<String>();
+//		for(String recipient : recipientslist){
+//			System.out.println(emp4);
+//			System.out.println(recipient);
+//			Query query = session.createQuery("select distinct r.rvalueJ from MessageJ m inner join m.recipients r where"
+//					+ " (m.senderJ= :email and r.rvalueJ = :recipient) and "
+//					+ "(m.senderJ= :recipient and r.rvalueJ = :email) )");
+//			query.setParameter("email", emp4);
+//			query.setParameter("recipient", recipient);
+////			System.out.println(res);
+////			mails.add(res);
+//			String res = (String) query.uniqueResult();
+//			System.out.println(res);
+//			friends.add(res);
+//		}
+//		return friends;
+//	}
 
 	private static List<String> takeRecipientsList(Session session, Object emp4) {
-		Query recipients = session.createQuery("select distinct rvalueJ from RecipientInfoJ where message in "
-				+ "(select midJ from MessageJ m where senderJ = :email)");
+//		Query recipients = session.createQuery("select distinct rvalueJ from RecipientInfoJ where message in "
+//				+ "(select midJ from MessageJ m where senderJ = :email)");
+		Query recipients = session.createQuery("select rvalue from SenderRecipientJ where sender = :email)");
 		recipients.setParameter("email", emp4);
 		List<String> recipientsL = recipients.list();
 		for(String s : recipientsL){
@@ -146,7 +163,7 @@ EmployeeInfoJ[] emp = new EmployeeInfoJ[4];
 		return recipientsL;
 	}
 	
-	private int recipientCount(List<String> recipients){
+	private static int recipientCount(List<String> recipients){
 		return recipients.size();		
 	}
 

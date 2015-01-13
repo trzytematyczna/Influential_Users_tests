@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+  
+ <hibernate-mapping>  
+  <class name="mgr.SenderRecipientJ" table="sender_recipient">
+     	<id name="id" type="int">
+            <column name="id" precision="10" not-null="true" />
+            <generator class="native" >
+    		    <param name="sequence">id_column_sequence</param>
+  		    </generator>      
+        </id>
+        <property name="sender" type="text">
+            <column name="sender" length="31" not-null="true" />
+        </property>
+        <property name="rvalue" type="text">
+            <column name="rvalue" length="31" not-null="false" />
+        </property>
+    </class>
+            
+ </hibernate-mapping>  
+ 
