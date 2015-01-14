@@ -40,7 +40,7 @@ public class App
 		session.beginTransaction();
 
 		Query email_query = session.createQuery("select e.Email_idJ from EmployeeListJ e");
-//		email_query.setMaxResults(2);
+//		email_query.setMaxResults(1);
 		List<Object> email_list = email_query.list();
 //		LinkedList<String[]> emails_count = new LinkedList<String[]>();
 
@@ -60,6 +60,8 @@ EmployeeInfoJ[] emp = new EmployeeInfoJ[4];
 			long mailFromFriends = takeFromFriendsEmailCount(session, emp4);
 			double rank = countProfileRank(sentcount, recivedcount, recipientcount,
 					friendscount, mailFromFriends, mailToFriends);
+			System.out.println(eid+" "+emp4+" "+sentcount+" "+recivedcount+" "+recipientcount+" "+
+					friendscount+" "+mailFromFriends+" "+mailToFriends+" "+rank);
 			EmployeeInfoJ empl = new EmployeeInfoJ(eid, (String) emp4, sentcount, recivedcount, recipientcount,
 					friendscount, mailFromFriends, mailToFriends, rank);
 			session.save(empl);
@@ -114,7 +116,7 @@ EmployeeInfoJ[] emp = new EmployeeInfoJ[4];
 		return friends;
 	}
 	private static long takeFriendsCount(Session session, Object emp4) {
-		System.out.println(emp4);
+//		System.out.println(emp4);
 		Query query = session.createQuery("select count(sender) from SenderRecipientJ where rvalue = :email "
 				+ "and sender in (select rvalue from SenderRecipientJ where sender = :email )");
 		query.setParameter("email", emp4);
@@ -205,8 +207,15 @@ EmployeeInfoJ[] emp = new EmployeeInfoJ[4];
 
 	private static double countProfileRank(long sentcount, long recivedcount, long recipientcount, 
 			long friendscount, long mailFromFriends, long mailToFriends) {
-		double rank = wp * ((double)(pc * recivedcount)+ (double)(pf*recipientcount) + (double)(paf*friendscount)+
-				(double)(pmpf*((double)(mailToFriends+mailFromFriends)/friendscount)))+wa * ((double)ap*sentcount); 
+		double rank;
+		if (friendscount == 0) {
+			rank = wp * ((double)(pc * recivedcount)+ (double)(pf*recipientcount) + (double)(paf*friendscount))+
+					wa * ((double)ap*sentcount); 
+		}
+		else{
+			rank = wp * ((double)(pc * recivedcount)+ (double)(pf*recipientcount) + (double)(paf*friendscount)+
+				(double)(pmpf*((double)(mailToFriends+mailFromFriends)/friendscount)))+wa * ((double)ap*sentcount);
+		}
 		return rank; 
 	}
 
