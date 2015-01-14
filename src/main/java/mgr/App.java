@@ -44,9 +44,7 @@ public class App
 		List<Object> email_list = email_query.list();
 //		LinkedList<String[]> emails_count = new LinkedList<String[]>();
 
-EmployeeInfoJ[] emp = new EmployeeInfoJ[4];
-//sent emails count		
-		for(Object emp4 : email_list){
+/*		for(Object emp4 : email_list){
 			System.out.println("Mails::"+emp4);//Arrays.toString(emp4));
 			int eid = takeEid(session, emp4);
 			long sentcount = takeSentCount(session, emp4);
@@ -67,7 +65,7 @@ EmployeeInfoJ[] emp = new EmployeeInfoJ[4];
 			session.save(empl);
 //			emails_count.add(tab);
 		}
-
+*/
 
 //	
 //		
@@ -101,9 +99,9 @@ EmployeeInfoJ[] emp = new EmployeeInfoJ[4];
 		}
 */
 		
-//		Query query = session.createQuery("select count(*) from EmployeeListJ");
-//		long count = (Long) query.uniqueResult();
-//		System.out.println("count: "+ count);
+		Query query = session.createQuery("select count(*) from EmployeeListJ");
+		long count = (Long) query.uniqueResult();
+		System.out.println("count: "+ count);
 		
 		session.getTransaction().commit();
 		session.close();
