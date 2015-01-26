@@ -11,9 +11,10 @@ public class EmployeeInfoJ {
 	private long mailToFriends;
 //	private String latest_email;
 	private double profilerank;
-
+	private int generation;
+	
 	public EmployeeInfoJ(long e, String mail, long sent, long recived, long recipients,
-			long friends, long from, long to, double profile) {
+			long friends, long from, long to, double profile, int generation) {
 		this.eid=e;
 		this.email=mail;
 		this.sent_email=sent;
@@ -24,9 +25,10 @@ public class EmployeeInfoJ {
 		this.mailToFriends=to;
 //		this.latest_email=latest;
 		this.profilerank=profile;
+		this.generation = generation;
 	}
 	public EmployeeInfoJ(long e, String mail, long sent, long recived, long recipients,
-			long friends, long from, long to) {
+			long friends, long from, long to, int generation) {
 		this.eid=e;
 		this.email=mail;
 		this.sent_email=sent;
@@ -37,6 +39,7 @@ public class EmployeeInfoJ {
 		this.mailToFriends=to;
 //		this.latest_email=latest;
 		this.profilerank=0;
+		this.generation=generation;
 	}
 	public long getEid() {
 		return eid;
@@ -92,5 +95,11 @@ public class EmployeeInfoJ {
 	public void setProfilerank(double profilerank) {
 		this.profilerank = profilerank;
 	}
-	
+	public int getGeneration() {
+		return generation;
+	}
+	public void setGeneration(int generation) {
+		this.generation = generation;
+	}
+
 }

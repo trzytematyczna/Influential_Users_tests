@@ -32,6 +32,9 @@
    <property name="profilerank" type="double">
             <column name="profilerank" precision="10" not-null="true" />
    </property>         
+   <property name="generation" type="int">
+            <column name="generation" precision="10" not-null="true" />
+   </property>         
  </class>
             
  </hibernate-mapping>  

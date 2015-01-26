@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+  
+ <hibernate-mapping>  
+  <class name="mgr.ProfileRankJ" table="profilerank">
+   <id name="eid" type="long">
+            <column name="eid" precision="10" not-null="true" />
+   </id>            
+   <property name="profilerank" type="int">
+            <column name="profilerank" precision="10" not-null="true" />
+   </property> 
+   <property name="generation" type="int">
+            <column name="generation" precision="10" not-null="true" />
+   </property> 
+   <property name="wp" type="double">
+            <column name="wp" precision="10" not-null="true" />
+   </property>         
+   <property name="wa" type="double">
+            <column name="wa" precision="10" not-null="true" />
+   </property>         
+   <property name="ap" type="double">
+            <column name="ap" precision="10" not-null="true" />
+   </property>         
+   <property name="pc" type="double">
+            <column name="pc" precision="10" not-null="true" />
+   </property>         
+   <property name="pf" type="double">
+            <column name="pf" precision="10" not-null="true" />
+   </property>         
+   <property name="paf" type="double">
+            <column name="paf" precision="10" not-null="true" />
+   </property>         
+   <property name="pmpf" type="double">
+            <column name="pmpf" precision="10" not-null="true" />
+   </property>         
+ </class>
+            
+ </hibernate-mapping>  
