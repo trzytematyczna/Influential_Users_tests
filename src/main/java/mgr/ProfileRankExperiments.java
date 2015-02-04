@@ -27,22 +27,25 @@ public class ProfileRankExperiments
 {
 	private static double wp = 1;
 	private static double wa = 1;
-	private static double ap = 0.03;
-	private static double pc = 0.07;
-	private static double pf = 0.05;
-	private static double paf = 0.07;
-	private static double pmpf = 0.06;
-	
+//	private static double ap = 0.03;  // sent 
+//	private static double pc = 0.07; //received
+//	private static double pf = 0.05; // recipients
+//	private static double paf = 0.07; //friends
+//	private static double pmpf = 0.06; //
+		
 	public static void main(String[] args) throws ParseException {
 		System.out.println("Maven + Hibernate + MySQL");
 		Session session = HibernateUtil.getSessionFactory().openSession();
  
 		session.beginTransaction();
-
-		Query query = session.createQuery("select i.eid, i.email, i.sent_email,i.received_email,"
-				+ "i.recipient_count,i.friends_count,i.mailFromFriends,i.mailToFriends from EmployeeInfoJ i");
-//		email_query.setMaxResults(1);
-		List<Object> list = query.list();
+		int i=3;
+		go(session, ++i, wp, wa, 0.04, 0.08, 0.05, 0.09, 0.07);
+		go(session, ++i, wp, wa, 0.09, 0.05, 0.05, 0.09, 0.06);
+		go(session, ++i, wp, wa, 0.08, 0.08, 0.05, 0.1, 0.06);
+		go(session, ++i, wp, wa, 0.04, 0.09, 0.05, 0.09, 0.05);
+		go(session, ++i, wp, wa, 0.07, 0.06, 0.05, 0.1, 0.06);
+		go(session, ++i, wp, wa, 0.08, 0.04, 0.05, 0.04, 0.06);
+		go(session, ++i, wp, wa, 0.04, 0.08, 0.05, 0.04, 0.06);
 //		LinkedList<String[]> emails_count = new LinkedList<String[]>();
 
 /*		for(Object emp4 : email_list){
@@ -106,6 +109,23 @@ public class ProfileRankExperiments
 		
 		session.getTransaction().commit();
 		session.close();
+	}
+	
+	private static void go(Session session, int gen, double  wp, double wa, double ap, double pc, double pf, double paf, double pmpf){
+		Query query = session.createQuery("select i.eid, i.email, i.sent_email,i.received_email,"
+				+ "i.recipient_count,i.friends_count,i.mailFromFriends,i.mailToFriends from EmployeeInfoJ i");
+//		email_query.setMaxResults(1);
+		List<Object[]> list = query.list();
+		for(Object[] entry:list){
+			System.out.println(Long.parseLong(entry[0].toString()));
+			double rank = countProfileRank(Long.parseLong(entry[2].toString()), Long.parseLong(entry[3].toString()),
+					Long.parseLong(entry[4].toString()), Long.parseLong(entry[5].toString()),
+					Long.parseLong(entry[6].toString()), Long.parseLong(entry[7].toString()),
+					wp, wa, ap, pc, pf, paf, pmpf);
+			ProfileRankJ prank = new ProfileRankJ(Integer.parseInt(entry[0].toString()), rank, gen, wp, wa, ap, pc, pf, paf, pmpf);
+			session.save(prank);
+		}
+
 	}
 	private static List<String> takeFriendsList(Session session, Object emp4) {
 		Query query = session.createQuery("select sender from SenderRecipientJ where rvalue = :email "
@@ -205,7 +225,8 @@ public class ProfileRankExperiments
 	}
 
 	private static double countProfileRank(long sentcount, long recivedcount, long recipientcount, 
-			long friendscount, long mailFromFriends, long mailToFriends) {
+			long friendscount, long mailFromFriends, long mailToFriends,
+			double  wp, double wa, double ap, double pc, double pf, double paf, double pmpf) {
 		double rank;
 		if (friendscount == 0) {
 			rank = wp * ((double)(pc * recivedcount)+ (double)(pf*recipientcount) + (double)(paf*friendscount))+

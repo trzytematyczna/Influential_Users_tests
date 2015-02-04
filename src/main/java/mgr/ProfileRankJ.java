@@ -1,9 +1,9 @@
 package mgr;
 
 public class ProfileRankJ {
-	
+	private int id;
 	private int eid;
-	private int profilerank;
+	private double profilerank;
 	private int generation;
 	private double wp;
 	private double wa;
@@ -12,8 +12,53 @@ public class ProfileRankJ {
 	private double pf;
 	private double paf;
 	private double pmpf;
+	private double at;
+	
+	public ProfileRankJ(int eid, double profilerank, int generation, double wp, double wa, double ap, double pc,
+			double pf, double paf, double pmpf,double at) {
+		this.eid=eid;
+		this.profilerank=profilerank;
+		this.generation=generation;
+		this.wp=wp;
+		this.wa=wa;
+		this.ap=ap;
+		this.pc=pc;
+		this.pf=pf;
+		this.paf=paf;
+		this.pmpf=pmpf;
+		this.at=at;
+	}
+	
+	public ProfileRankJ(int eid, double rank, int generation, double wp, double wa, double ap, double pc,
+			double pf, double paf, double pmpf) {
+		this.eid=eid;
+		this.profilerank=rank;
+		this.generation=generation;
+		this.wp=wp;
+		this.wa=wa;
+		this.ap=ap;
+		this.pc=pc;
+		this.pf=pf;
+		this.paf=paf;
+		this.pmpf=pmpf;
+		this.at=0;
+	}
 	
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public double getAt() {
+		return at;
+	}
+	public void setAt(double at) {
+		this.at = at;
+	}
 	public int getGeneration() {
 		return generation;
 	}
@@ -26,10 +71,10 @@ public class ProfileRankJ {
 	public void setEid(int eid) {
 		this.eid = eid;
 	}
-	public int getProfilerank() {
+	public double getProfilerank() {
 		return profilerank;
 	}
-	public void setProfilerank(int profilerank) {
+	public void setProfilerank(double profilerank) {
 		this.profilerank = profilerank;
 	}
 	public double getWp() {

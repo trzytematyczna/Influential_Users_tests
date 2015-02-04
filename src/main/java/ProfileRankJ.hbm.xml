@@ -5,14 +5,29 @@
   
  <hibernate-mapping>  
   <class name="mgr.ProfileRankJ" table="profilerank">
-   <id name="eid" type="long">
+     	<id name="id" type="int">
+            <column name="id" precision="10" not-null="false" />
+            <generator class="identity" >
+    		    <param name="sequence">id_column_sequence</param>
+  		    </generator>      
+        </id>
+<!-- <composite-id>
+    <key-property name="generation" type="int"> 
+            <column name="generation" precision="10" not-null="true" />
+	</key-property>
+    <key-property name="eid" type="long" > 
             <column name="eid" precision="10" not-null="true" />
-   </id>            
-   <property name="profilerank" type="int">
-            <column name="profilerank" precision="10" not-null="true" />
-   </property> 
+	</key-property>
+</composite-id>
+ -->   
+   <property name="eid" type="int">
+            <column name="eid" precision="10" not-null="true" />
+   </property >
    <property name="generation" type="int">
             <column name="generation" precision="10" not-null="true" />
+   </property > 
+   <property name="profilerank" type="double">
+            <column name="profilerank" precision="10" not-null="true" />
    </property> 
    <property name="wp" type="double">
             <column name="wp" precision="10" not-null="true" />
@@ -34,7 +49,10 @@
    </property>         
    <property name="pmpf" type="double">
             <column name="pmpf" precision="10" not-null="true" />
-   </property>         
+   </property>
+   <property name="at" type="double">
+            <column name="at" precision="10" not-null="true" />
+   </property>           
  </class>
             
  </hibernate-mapping>  
