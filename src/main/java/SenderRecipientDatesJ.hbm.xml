@@ -4,7 +4,7 @@
  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
   
  <hibernate-mapping>  
-  <class name="sql.SenderRecipientJ" table="sender_recipient">
+  <class name="sql.SenderRecipientDatesJ" table="sender_recipient_dates">
      	<id name="id" type="int">
             <column name="id" precision="10" not-null="true" />
             <generator class="native" >
@@ -16,6 +16,9 @@
         </property>
         <property name="rvalue" type="text">
             <column name="rvalue" length="31" not-null="false" />
+        </property>
+        <property name="date" type="date">
+            <column name="date" length="31" not-null="false" />
         </property>
     </class>
             

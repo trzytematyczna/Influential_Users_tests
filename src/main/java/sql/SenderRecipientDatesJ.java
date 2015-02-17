@@ -1,10 +1,12 @@
-package mgr;
+package sql;
 
-public class SenderRecipientJ {
+import java.util.Date;
+
+public class SenderRecipientDatesJ {
 	private int id;
 	private String sender;
 	private String rvalue;
-	
+	private Date date;
 	
 	public int getId() {
 		return id;
@@ -24,5 +26,10 @@ public class SenderRecipientJ {
 	public void setRvalue(String rvalue) {
 		this.rvalue = rvalue;
 	}
-	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 }

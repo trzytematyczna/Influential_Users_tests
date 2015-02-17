@@ -4,7 +4,7 @@
  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
   
  <hibernate-mapping>  
-  <class name="mgr.ReferenceInfoJ" table="ReferenceInfo">
+  <class name="sql.ReferenceInfoJ" table="ReferenceInfo">
    <id name="rfidJ" type="int">
             <column name="rfid" precision="10" not-null="true" />
         </id>

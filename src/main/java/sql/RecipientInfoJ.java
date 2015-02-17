@@ -1,4 +1,5 @@
-package mgr;
+package sql;
+
 
 public class RecipientInfoJ {
 	private int ridJ;

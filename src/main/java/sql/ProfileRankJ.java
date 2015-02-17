@@ -1,4 +1,4 @@
-package mgr;
+package sql;
 
 public class ProfileRankJ {
 	private int id;

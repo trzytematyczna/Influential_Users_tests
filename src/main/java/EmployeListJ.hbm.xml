@@ -4,7 +4,7 @@
  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
   
  <hibernate-mapping>  
-  <class name="mgr.EmployeeListJ" table="employeelist">
+  <class name="sql.EmployeeListJ" table="employeelist">
    		<id name="eidJ" type="int">
             <column name="eid" precision="10" not-null="true" />
         </id>
@@ -16,6 +16,9 @@
         </property>
         <property name="Email_idJ" type="text">
             <column name="Email_id" length="31" not-null="false" />
+        </property>
+         <property name="role" type="text">
+            <column name="role" length="31" not-null="false" />
         </property>
     </class>
             

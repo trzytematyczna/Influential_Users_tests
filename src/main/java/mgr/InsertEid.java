@@ -32,7 +32,7 @@ public class InsertEid
  
 		session.beginTransaction();
 
-		Query email_query = session.createQuery("select e.Email_idJ,e.eidJ from EmployeeListJ e");
+		Query email_query = session.createQuery("select e.Email_idJ,e.eidJ from EmployeeListJ e where e.eidJ >151");
 //		email_query.setMaxResults(1);
 		List<Object[]> email_list = email_query.list();
 		
@@ -43,6 +43,7 @@ public class InsertEid
 		for(Object[] m : mail){
 			for(Object emp4[] : email_list){
 				if((emp4[0].toString()).equals((m[0].toString()))){
+					System.out.println(emp4[1]);
 					Query updatequery = session.createQuery("update PageRankJ set eidJ= :eid where mailJ = :mail");
 					updatequery.setParameter("eid", emp4[1]);
 					updatequery.setParameter("mail", m[0]);

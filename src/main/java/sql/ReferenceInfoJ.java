@@ -1,4 +1,4 @@
-package mgr;
+package sql;
 
 public class ReferenceInfoJ {
 	

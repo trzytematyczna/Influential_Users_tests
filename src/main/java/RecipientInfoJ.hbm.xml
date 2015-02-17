@@ -4,11 +4,11 @@
  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
   
  <hibernate-mapping>  
-  <class name="mgr.RecipientInfoJ" table="RecipientInfo">
+  <class name="sql.RecipientInfoJ" table="RecipientInfo">
    <id name="ridJ" type="int">
             <column name="rid" precision="10" not-null="true" />
         </id>
-        <many-to-one name="message" class="mgr.MessageJ" fetch="select">
+        <many-to-one name="message" class="sql.MessageJ" fetch="select">
             <column name="mid" not-null="true" />
         </many-to-one>
 <!-- <property name="midJ" type="int">

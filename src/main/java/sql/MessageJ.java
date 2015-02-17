@@ -1,4 +1,4 @@
-package mgr;
+package sql;
 
 import java.util.Set;
 

@@ -4,10 +4,16 @@
  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
   
  <hibernate-mapping>  
-  <class name="sql.EmployeeInfoJ" table="EmployeeInfo">
-   <id name="eid" type="long">
+  <class name="sql.CountsSlotsJ" table="count_slots">
+   <id name="id" type="int" >
+	      <column name="id" precision="10" not-null="true"/>
+	      <generator class="native" >
+	   		 <param name="sequence">id_column_sequence</param>
+	  	  </generator>      
+   </id>
+   <property  name="eid" type="long">
             <column name="eid" precision="10" not-null="true" />
-   </id>            
+   </property >            
    <property name="email" type="text">
        <column name="email" length="31" not-null="true" />
    </property>
@@ -29,11 +35,8 @@
       <property name="mailToFriends" type="long">
             <column name="mailToFriends" precision="10" not-null="true" />
    </property>             
-   <property name="profilerank" type="double">
-            <column name="profilerank" precision="10" not-null="true" />
-   </property>         
-   <property name="generation" type="int">
-            <column name="generation" precision="10" not-null="true" />
+   <property name="date" type="text">
+            <column name="date" precision="10" not-null="true" />
    </property>         
  </class>
             

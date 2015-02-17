@@ -4,7 +4,7 @@
  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
   
  <hibernate-mapping>  
-  <class name="mgr.ProfileRankJ" table="profilerank">
+  <class name="sql.ProfileRankJ" table="profilerank">
      	<id name="id" type="int">
             <column name="id" precision="10" not-null="false" />
             <generator class="identity" >

@@ -1,5 +1,9 @@
 package mgr;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.Collator;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,21 +23,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaQuery;
 
-import sql.EmployeeInfoJ;
+import sql.EmployeeListJ;
 
 /**
  * Hello world!
  *
  */
-public class App 
+public class InsertRole 
 {
-	private static double wp = 1;
-	private static double wa = 1;
-	private static double ap = 0.03;
-	private static double pc = 0.07;
-	private static double pf = 0.05;
-	private static double paf = 0.07;
-	private static double pmpf = 0.06;
 	
 	public static void main(String[] args) throws ParseException {
 		System.out.println("Maven + Hibernate + MySQL");
@@ -41,13 +38,66 @@ public class App
  
 		session.beginTransaction();
 
-		Query email_query = session.createQuery("select e.Email_idJ from EmployeeListJ e where e.eidJ>151");
+		Query email_query = session.createQuery("select e.firstNameJ, e.lastNameJ from EmployeeListJ e");
 //		email_query.setMaxResults(1);
-		List<Object> email_list = email_query.list();
+		List<Object[]> email_list = email_query.list();
+		
 //		LinkedList<String[]> emails_count = new LinkedList<String[]>();
 
-		for(Object emp4 : email_list){
-			System.out.println("Mails::"+emp4);//Arrays.toString(emp4));
+		
+		String csvFile = "C://Users//MZ//Desktop//Erinaki//Enron_Employee_Status.csv";
+		BufferedReader br = null;
+		String line = "";
+		String cvsSplitBy = ",";
+		String[] employees = null;
+		int i=181;
+		try {
+			br = new BufferedReader(new FileReader(csvFile));
+			while ((line = br.readLine()) != null) {
+				
+				employees = line.split(cvsSplitBy);
+				boolean is = false;
+				for(Object emp4[] : email_list){
+					if((emp4[0].toString()).equals(employees[0]) && (emp4[1].toString()).equals(employees[1]) ){
+						is = true;
+//						Query updatequery = session.createQuery("update EmployeeListJ set role = :role where "
+//								+ "firstNameJ = :first and lastNameJ = :last");
+//						updatequery.setParameter("first", emp4[0]);
+//						updatequery.setParameter("last", emp4[1]);
+//						updatequery.setParameter("role", employees[2]);
+//						int result = updatequery.executeUpdate();
+////						System.out.println(result);
+					}
+				}
+				if(!is){
+					System.out.println(i+" "+employees[0]+" "+ employees[1]+" "+employees[2]);
+
+//					if(!employees[1].equals("Gilberth-Smith") && !employees[1].equals("Arnold")){
+//						System.out.println(i+" "+employees[0]+" "+ employees[1]+" "+employees[2]);
+//						EmployeeListJ empl = new EmployeeListJ();
+//						empl.setEidJ(i++);
+//						empl.setFirstNameJ(employees[0]);
+//						empl.setLastNameJ(employees[1]);
+//						empl.setEmail_idJ(employees[0].toLowerCase()+"."+employees[1].toLowerCase()+"@enron.com");
+//						empl.setRole(employees[2]);
+//						session.save(empl);
+//					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+/*			System.out.println("Mails::"+emp4);//Arrays.toString(emp4));
 			int eid = takeEid(session, emp4);
 			long sentcount = takeSentCount(session, emp4);
 			long recivedcount = takeReceivedCount(session, emp4);
@@ -63,11 +113,11 @@ public class App
 			System.out.println(eid+" "+emp4+" "+sentcount+" "+recivedcount+" "+recipientcount+" "+
 					friendscount+" "+mailFromFriends+" "+mailToFriends+" "+rank);
 			EmployeeInfoJ empl = new EmployeeInfoJ(eid, (String) emp4, sentcount, recivedcount, recipientcount,
-					friendscount, mailFromFriends, mailToFriends, rank, 1);
+					friendscount, mailFromFriends, mailToFriends, rank);
 			session.save(empl);
 //			emails_count.add(tab);
 		}
-
+*/
 
 //	
 //		
@@ -101,9 +151,9 @@ public class App
 		}
 */
 		
-		Query query = session.createQuery("select count(*) from EmployeeListJ");
-		long count = (Long) query.uniqueResult();
-		System.out.println("count: "+ count);
+//		Query query = session.createQuery("select count(*) from EmployeeListJ");
+//		long count = (Long) query.uniqueResult();
+//		System.out.println("count: "+ count);
 		
 		session.getTransaction().commit();
 		session.close();
@@ -205,18 +255,5 @@ public class App
 		return eid;
 	}
 
-	private static double countProfileRank(long sentcount, long recivedcount, long recipientcount, 
-			long friendscount, long mailFromFriends, long mailToFriends) {
-		double rank;
-		if (friendscount == 0) {
-			rank = wp * ((double)(pc * recivedcount)+ (double)(pf*recipientcount) + (double)(paf*friendscount))+
-					wa * ((double)ap*sentcount); 
-		}
-		else{
-			rank = wp * ((double)(pc * recivedcount)+ (double)(pf*recipientcount) + (double)(paf*friendscount)+
-				(double)(pmpf*((double)(mailToFriends+mailFromFriends)/friendscount)))+wa * ((double)ap*sentcount);
-		}
-		return rank; 
-	}
 
 }

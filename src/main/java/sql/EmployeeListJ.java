@@ -1,4 +1,4 @@
-package mgr;
+package sql;
 
 public class EmployeeListJ {
 	
@@ -6,6 +6,7 @@ public class EmployeeListJ {
 	private String firstNameJ;
 	private String lastNameJ;
 	private String Email_idJ;
+	private String role;
 	
 	public EmployeeListJ() {
 	}
@@ -70,6 +71,14 @@ public class EmployeeListJ {
 	 */
 	public void setEmail_idJ(String email_id) {
 		Email_idJ = email_id;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 

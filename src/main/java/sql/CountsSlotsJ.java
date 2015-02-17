@@ -1,6 +1,8 @@
-package mgr;
+package sql;
 
-public class EmployeeInfoJ {
+
+public class CountsSlotsJ {
+	private int id;
 	private long eid;
 	private String email;
 	private long sent_email;
@@ -9,12 +11,11 @@ public class EmployeeInfoJ {
 	private long friends_count;
 	private long mailFromFriends;
 	private long mailToFriends;
+	private String date;
 //	private String latest_email;
-	private double profilerank;
-	private int generation;
 	
-	public EmployeeInfoJ(long e, String mail, long sent, long recived, long recipients,
-			long friends, long from, long to, double profile, int generation) {
+	public CountsSlotsJ(long e, String mail, long sent, long recived, long recipients,
+			long friends, long from, long to, String dat) {
 		this.eid=e;
 		this.email=mail;
 		this.sent_email=sent;
@@ -23,24 +24,10 @@ public class EmployeeInfoJ {
 		this.friends_count=friends;
 		this.mailFromFriends=from;
 		this.mailToFriends=to;
+		this.date = dat;
 //		this.latest_email=latest;
-		this.profilerank=profile;
-		this.generation = generation;
 	}
-	public EmployeeInfoJ(long e, String mail, long sent, long recived, long recipients,
-			long friends, long from, long to, int generation) {
-		this.eid=e;
-		this.email=mail;
-		this.sent_email=sent;
-		this.received_email=recived;
-		this.recipient_count=recipients;
-		this.friends_count=friends;
-		this.mailFromFriends=from;
-		this.mailToFriends=to;
-//		this.latest_email=latest;
-		this.profilerank=0;
-		this.generation=generation;
-	}
+	
 	public long getEid() {
 		return eid;
 	}
@@ -89,17 +76,21 @@ public class EmployeeInfoJ {
 	public void setMailToFriends(long mailToFriends) {
 		this.mailToFriends = mailToFriends;
 	}
-	public double getProfilerank() {
-		return profilerank;
+
+	public String getDate() {
+		return date;
 	}
-	public void setProfilerank(double profilerank) {
-		this.profilerank = profilerank;
+
+	public void setDate(String date) {
+		this.date = date;
 	}
-	public int getGeneration() {
-		return generation;
+
+	public int getId() {
+		return id;
 	}
-	public void setGeneration(int generation) {
-		this.generation = generation;
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

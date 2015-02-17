@@ -4,7 +4,7 @@
  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
   
  <hibernate-mapping>  
-  <class name="mgr.MessageJ" table="Message">
+  <class name="sql.MessageJ" table="Message">
    		<id name="midJ" type="int">
             <column name="mid" precision="10" not-null="true" />
         </id>
@@ -32,7 +32,7 @@
             <key>
                 <column name="mid" not-null="true" />
             </key>
-            <one-to-many class="mgr.RecipientInfoJ" />
+            <one-to-many class="sql.RecipientInfoJ" />
         </set>
     </class>
             
