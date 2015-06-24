@@ -12,6 +12,7 @@ public class CountsSlotsJ {
 	private long mailFromFriends;
 	private long mailToFriends;
 	private String date;
+<<<<<<< HEAD
 	private double profilerank;
 //	private String latest_email;
 	
@@ -30,6 +31,11 @@ public class CountsSlotsJ {
 //		this.latest_email=latest;
 	}
 	public CountsSlotsJ(long e, String mail, long sent, long recived, long recipients,
+=======
+//	private String latest_email;
+	
+	public CountsSlotsJ(long e, String mail, long sent, long recived, long recipients,
+>>>>>>> 378029ed2cf65940944a5b43687140a4c0668b5d
 			long friends, long from, long to, String dat) {
 		this.eid=e;
 		this.email=mail;
@@ -40,9 +46,15 @@ public class CountsSlotsJ {
 		this.mailFromFriends=from;
 		this.mailToFriends=to;
 		this.date = dat;
+<<<<<<< HEAD
 //		this.profilerank = profilerank;
 //		this.latest_email=latest;
 	}
+=======
+//		this.latest_email=latest;
+	}
+	
+>>>>>>> 378029ed2cf65940944a5b43687140a4c0668b5d
 	public long getEid() {
 		return eid;
 	}
@@ -108,6 +120,7 @@ public class CountsSlotsJ {
 		this.id = id;
 	}
 
+<<<<<<< HEAD
 	public double getProfilerank() {
 		return profilerank;
 	}
@@ -116,4 +129,6 @@ public class CountsSlotsJ {
 		this.profilerank = profilerank;
 	}
 
+=======
+>>>>>>> 378029ed2cf65940944a5b43687140a4c0668b5d
 }

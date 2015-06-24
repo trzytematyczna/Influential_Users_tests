@@ -42,6 +42,12 @@ public class InsertRole
 //		email_query.setMaxResults(1);
 		List<Object[]> email_list = email_query.list();
 		
+<<<<<<< HEAD
+=======
+//		LinkedList<String[]> emails_count = new LinkedList<String[]>();
+
+		
+>>>>>>> 378029ed2cf65940944a5b43687140a4c0668b5d
 		String csvFile = "C://Users//MZ//Desktop//Erinaki//Enron_Employee_Status.csv";
 		BufferedReader br = null;
 		String line = "";
@@ -94,7 +100,63 @@ public class InsertRole
 				}
 			}
 		}
+<<<<<<< HEAD
 
+=======
+/*			System.out.println("Mails::"+emp4);//Arrays.toString(emp4));
+			int eid = takeEid(session, emp4);
+			long sentcount = takeSentCount(session, emp4);
+			long recivedcount = takeReceivedCount(session, emp4);
+//			List<String> recipientslist = takeRecipientsList(session, emp4); 
+			long recipientcount = takeRecipientCount(session, emp4);
+//			long recipientcount = recipientCount(recipientslist);
+//			List<String> friendslist = takeFriendsList(session, emp4);
+			long friendscount = takeFriendsCount(session, emp4);
+			long mailToFriends = takeToFriendsEmailCount(session, emp4);
+			long mailFromFriends = takeFromFriendsEmailCount(session, emp4);
+			double rank = countProfileRank(sentcount, recivedcount, recipientcount,
+					friendscount, mailFromFriends, mailToFriends);
+			System.out.println(eid+" "+emp4+" "+sentcount+" "+recivedcount+" "+recipientcount+" "+
+					friendscount+" "+mailFromFriends+" "+mailToFriends+" "+rank);
+			EmployeeInfoJ empl = new EmployeeInfoJ(eid, (String) emp4, sentcount, recivedcount, recipientcount,
+					friendscount, mailFromFriends, mailToFriends, rank);
+			session.save(empl);
+//			emails_count.add(tab);
+		}
+*/
+
+//	
+//		
+		
+//last mail value
+/*
+		LinkedList<String[]> lastest_list = new LinkedList<String[]>();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		for(Object emp4 : email_list){
+			Query timequery = session.createQuery("select senderJ, m.dateJ from MessageJ m where senderJ = :email");
+//			timequery.setMaxResults(5);
+			timequery.setParameter("email", emp4);
+			List<Object[]> times = timequery.list();
+			
+			Date latest = format.parse("1880-10-10 10:10:10");
+			Date prev = format.parse("1880-10-10 10:10:10");
+			
+			for (Object[] arr : times){
+//			System.out.println(arr[0]+""+arr[1]);
+				Date date = format.parse((String) arr[1]);
+				 if (prev.compareTo(date) <= 0) {
+					 latest=date;
+				 }
+				 prev = date;
+			}
+			String [] tab = {(String) emp4, format.format(latest)};
+			lastest_list.add(tab);
+//			System.out.println(Arrays.l );
+//			System.out.println("Newest: "+latest);
+//			System.out.println(times.size());
+		}
+*/
+>>>>>>> 378029ed2cf65940944a5b43687140a4c0668b5d
 		
 //		Query query = session.createQuery("select count(*) from EmployeeListJ");
 //		long count = (Long) query.uniqueResult();

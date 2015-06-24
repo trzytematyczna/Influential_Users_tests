@@ -37,10 +37,14 @@
    </property>             
    <property name="date" type="text">
             <column name="date" precision="10" not-null="true" />
+<<<<<<< HEAD
    </property>       
    <property name="profilerank" type="double">
             <column name="profilerank" precision="10" not-null="true" />
    </property>       
+=======
+   </property>         
+>>>>>>> 378029ed2cf65940944a5b43687140a4c0668b5d
  </class>
             
  </hibernate-mapping>  

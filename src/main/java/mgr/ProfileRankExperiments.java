@@ -40,6 +40,7 @@ public class ProfileRankExperiments
 		Session session = HibernateUtil.getSessionFactory().openSession();
  
 		session.beginTransaction();
+<<<<<<< HEAD
 		int i=4;
 //		go(session, ++i, wp, wa, 0.1, 0.1, 0.1, 0.1, 0.1); //gen 3
 //		go(session, ++i, wp, wa, 0.03, 0.03, 0.04, 0.1, 0.9);
@@ -62,6 +63,16 @@ public class ProfileRankExperiments
 //		go(session, ++i, wp, wa, 0.07, 0.06, 0.05, 0.1, 0.06);
 //		go(session, ++i, wp, wa, 0.08, 0.04, 0.05, 0.04, 0.06);
 //		go(session, ++i, wp, wa, 0.04, 0.08, 0.05, 0.04, 0.06);
+=======
+		int i=3;
+		go(session, ++i, wp, wa, 0.04, 0.08, 0.05, 0.09, 0.07);
+		go(session, ++i, wp, wa, 0.09, 0.05, 0.05, 0.09, 0.06);
+		go(session, ++i, wp, wa, 0.08, 0.08, 0.05, 0.1, 0.06);
+		go(session, ++i, wp, wa, 0.04, 0.09, 0.05, 0.09, 0.05);
+		go(session, ++i, wp, wa, 0.07, 0.06, 0.05, 0.1, 0.06);
+		go(session, ++i, wp, wa, 0.08, 0.04, 0.05, 0.04, 0.06);
+		go(session, ++i, wp, wa, 0.04, 0.08, 0.05, 0.04, 0.06);
+>>>>>>> 378029ed2cf65940944a5b43687140a4c0668b5d
 //		LinkedList<String[]> emails_count = new LinkedList<String[]>();
 
 /*		for(Object emp4 : email_list){
@@ -87,6 +98,40 @@ public class ProfileRankExperiments
 		}
 */
 
+<<<<<<< HEAD
+=======
+//	
+//		
+		
+//last mail value
+/*
+		LinkedList<String[]> lastest_list = new LinkedList<String[]>();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		for(Object emp4 : email_list){
+			Query timequery = session.createQuery("select senderJ, m.dateJ from MessageJ m where senderJ = :email");
+//			timequery.setMaxResults(5);
+			timequery.setParameter("email", emp4);
+			List<Object[]> times = timequery.list();
+			
+			Date latest = format.parse("1880-10-10 10:10:10");
+			Date prev = format.parse("1880-10-10 10:10:10");
+			
+			for (Object[] arr : times){
+//			System.out.println(arr[0]+""+arr[1]);
+				Date date = format.parse((String) arr[1]);
+				 if (prev.compareTo(date) <= 0) {
+					 latest=date;
+				 }
+				 prev = date;
+			}
+			String [] tab = {(String) emp4, format.format(latest)};
+			lastest_list.add(tab);
+//			System.out.println(Arrays.l );
+//			System.out.println("Newest: "+latest);
+//			System.out.println(times.size());
+		}
+*/
+>>>>>>> 378029ed2cf65940944a5b43687140a4c0668b5d
 		
 		Query query1 = session.createQuery("select count(*) from EmployeeListJ");
 		long count = (Long) query1.uniqueResult();
@@ -97,6 +142,7 @@ public class ProfileRankExperiments
 	}
 	
 	private static void go(Session session, int gen, double  wp, double wa, double ap, double pc, double pf, double paf, double pmpf){
+<<<<<<< HEAD
 //		Query query = session.createQuery("select i.eid, i.email, i.sent_email,i.received_email,"
 //				+ "i.recipient_count,i.friends_count,i.mailFromFriends,i.mailToFriends, i.date from CountsSlotsJ i"
 //				+ " where i.eid>151");
@@ -107,11 +153,20 @@ public class ProfileRankExperiments
 		int i=1;
 		for(Object[] entry:list){
 			System.out.println(i+++" "+Long.parseLong(entry[0].toString()));
+=======
+		Query query = session.createQuery("select i.eid, i.email, i.sent_email,i.received_email,"
+				+ "i.recipient_count,i.friends_count,i.mailFromFriends,i.mailToFriends from EmployeeInfoJ i");
+//		email_query.setMaxResults(1);
+		List<Object[]> list = query.list();
+		for(Object[] entry:list){
+			System.out.println(Long.parseLong(entry[0].toString()));
+>>>>>>> 378029ed2cf65940944a5b43687140a4c0668b5d
 			double rank = countProfileRank(Long.parseLong(entry[2].toString()), Long.parseLong(entry[3].toString()),
 					Long.parseLong(entry[4].toString()), Long.parseLong(entry[5].toString()),
 					Long.parseLong(entry[6].toString()), Long.parseLong(entry[7].toString()),
 					wp, wa, ap, pc, pf, paf, pmpf);
 			ProfileRankJ prank = new ProfileRankJ(Integer.parseInt(entry[0].toString()), rank, gen, wp, wa, ap, pc, pf, paf, pmpf);
+<<<<<<< HEAD
 			
 			session.save(prank);
 			System.out.println(rank);
@@ -120,6 +175,9 @@ public class ProfileRankExperiments
 //		up.setParameter("profilerank", rank);
 //		up.setParameter("eid", entry[0]);
 //		up.executeUpdate();
+=======
+			session.save(prank);
+>>>>>>> 378029ed2cf65940944a5b43687140a4c0668b5d
 		}
 
 	}

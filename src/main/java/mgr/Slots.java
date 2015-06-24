@@ -34,7 +34,11 @@ public class Slots
  
 		session.beginTransaction();
 
+<<<<<<< HEAD
 		Query email_query = session.createQuery("select e.email from EmployeeInfoJ e where eid>151 and profilerank>0");
+=======
+		Query email_query = session.createQuery("select e.Email_idJ from EmployeeListJ e");
+>>>>>>> 378029ed2cf65940944a5b43687140a4c0668b5d
 //		email_query.setMaxResults(1);
 		List<Object> email_list = email_query.list();
 		LinkedList<String[]> emails_count = new LinkedList<String[]>();
@@ -48,7 +52,10 @@ public class Slots
 				for(String m : months){
 					Object dateval = y+m;
 					int eid = takeEid(session, emp4);
+<<<<<<< HEAD
 //					long eid = (long)emp4;
+=======
+>>>>>>> 378029ed2cf65940944a5b43687140a4c0668b5d
 					long sentcount = takeSentCount(session, emp4, dateval);
 					long recivedcount = takeReceivedCount(session, emp4, dateval);
 					long recipientcount = takeRecipientCount(session, emp4, dateval);	

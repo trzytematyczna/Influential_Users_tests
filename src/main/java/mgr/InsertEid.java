@@ -77,6 +77,38 @@ public class InsertEid
 //	
 //		
 		
+<<<<<<< HEAD
+=======
+//last mail value
+/*
+		LinkedList<String[]> lastest_list = new LinkedList<String[]>();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		for(Object emp4 : email_list){
+			Query timequery = session.createQuery("select senderJ, m.dateJ from MessageJ m where senderJ = :email");
+//			timequery.setMaxResults(5);
+			timequery.setParameter("email", emp4);
+			List<Object[]> times = timequery.list();
+			
+			Date latest = format.parse("1880-10-10 10:10:10");
+			Date prev = format.parse("1880-10-10 10:10:10");
+			
+			for (Object[] arr : times){
+//			System.out.println(arr[0]+""+arr[1]);
+				Date date = format.parse((String) arr[1]);
+				 if (prev.compareTo(date) <= 0) {
+					 latest=date;
+				 }
+				 prev = date;
+			}
+			String [] tab = {(String) emp4, format.format(latest)};
+			lastest_list.add(tab);
+//			System.out.println(Arrays.l );
+//			System.out.println("Newest: "+latest);
+//			System.out.println(times.size());
+		}
+*/
+		
+>>>>>>> 378029ed2cf65940944a5b43687140a4c0668b5d
 		Query query = session.createQuery("select count(*) from EmployeeListJ");
 		long count = (Long) query.uniqueResult();
 		System.out.println("count: "+ count);
