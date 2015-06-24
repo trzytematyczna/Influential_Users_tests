@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+  
+ <hibernate-mapping>  
+  <class name="sql.RolesJ" table="roles">
+     <id name="id" type="int" >
+	      <column name="id" precision="10" not-null="true"/>
+	      <generator class="native" >
+	   		 <param name="sequence">id_column_sequence</param>
+	  	  </generator>      
+   </id>
+   <property  name="eid" type="long">
+            <column name="eid" precision="10" not-null="true" />
+   </property >            
+   <property name="email" type="text">
+       <column name="email" length="31" not-null="true" />
+   </property>
+   <property name="CEO" type="int">
+            <column name="CEO" precision="10" not-null="true" />
+   </property> 
+   <property name="President" type="int">
+            <column name="President" precision="10" not-null="true" />
+   </property> 
+   <property name="VicePresident" type="int">
+            <column name="VicePresident" precision="10" not-null="true" />
+   </property> 
+   <property name="Director" type="int">
+            <column name="Director" precision="10" not-null="true" />
+   </property> 
+   <property name="Manager" type="int">
+            <column name="Manager" precision="10" not-null="true" />
+   </property> 
+   <property name="Lawyer" type="int">
+            <column name="Lawyer" precision="10" not-null="true" />
+   </property> 
+   <property name="Employee" type="int">
+            <column name="Employee" precision="10" not-null="true" />
+   </property> 
+   <property name="Trader" type="int">
+            <column name="Trader" precision="10" not-null="true" />
+   </property> 
+   <property name="NA" type="int">
+            <column name="NA" precision="10" not-null="true" />
+   </property> 
+   <property name="what" type="text">
+            <column name="what" precision="10" not-null="false" />
+   </property> 
+ </class>
+            
+ </hibernate-mapping>  

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+  
+ <hibernate-mapping>  
+  <class name="sql.EmployeeInfoJ" table="EmployeeInfo">
+   <id name="eid" type="long">
+            <column name="eid" precision="10" not-null="true" />
+   </id>            
+   <property name="email" type="text">
+       <column name="email" length="31" not-null="true" />
+   </property>
+   <property name="sent_email" type="long">
+            <column name="sent_email" precision="10" not-null="true" />
+   </property> 
+   <property name="received_email" type="long">
+            <column name="received_email" precision="10" not-null="true" />
+   </property>            
+   <property name="recipient_count" type="long">
+            <column name="recipient_count" precision="10" not-null="true" />
+   </property>            
+   <property name="friends_count" type="long">
+            <column name="friends_count" precision="10" not-null="true" />
+   </property>   
+      <property name="mailFromFriends" type="long">
+            <column name="mailFromFriends" precision="10" not-null="true" />
+   </property>    
+      <property name="mailToFriends" type="long">
+            <column name="mailToFriends" precision="10" not-null="true" />
+   </property>             
+   <property name="profilerank" type="double">
+            <column name="profilerank" precision="10" not-null="true" />
+   </property>         
+   <property name="generation" type="int">
+            <column name="generation" precision="10" not-null="true" />
+   </property>         
+ </class>
+            
+ </hibernate-mapping>  

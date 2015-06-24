@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+  
+ <hibernate-mapping>  
+  <class name="sql.MessageJ" table="Message">
+   		<id name="midJ" type="int">
+            <column name="mid" precision="10" not-null="true" />
+        </id>
+        <property name="senderJ" type="text">
+            <column name="sender" length="127" not-null="true" />
+        </property>
+        <property name="dateJ" type="text">
+            <column name="date" length="20" not-null="false" />
+        </property>
+        <property name="message_idJ" type="text">
+            <column name="message_id" length="127" not-null="false" />
+        </property>
+        <property name="subjectJ" type="text">
+            <column name="subject" length="20" not-null="false" />
+        </property>
+        <property name="bodyJ" type="text">
+            <column name="body" length="20" not-null="false" />
+        </property>
+        <property name="folderJ" type="text">
+            <column name="folder" length="127" not-null="false" />
+        </property>
+        
+        <set name="recipients" table="recipientinfo" 
+				inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="mid" not-null="true" />
+            </key>
+            <one-to-many class="sql.RecipientInfoJ" />
+        </set>
+    </class>
+            
+ </hibernate-mapping>  
